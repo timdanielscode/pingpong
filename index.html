@@ -1,0 +1,121 @@
+<!-- 97044742 -->
+<!-- Tim Daniels-->
+<!DOCTYPE html>
+<html lang="nl">
+	<head>
+		<meta charset="UTF-8">
+		<style>
+			#box{
+				width: 400px;
+				height: 200px;
+				border: solid black;
+				position: relative;
+			}
+			.cirkel{
+				border-radius: 50%;
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<div id="1" class="cirkel">
+			</div>
+			<div id="2" class="cirkel">
+			</div>
+			<div id="3" class="cirkel">
+			</div>
+		</div>
+	</body>
+</html>
+<script>
+	// ball object 
+	var Ball = function(id,color,width,height){
+		var right = true;
+		var down = true;
+		this.element = document.getElementById(id);
+		this.element.style.width = width;
+		this.element.style.height = height;
+		this.element.style.backgroundColor = color;
+		
+		// returns left position of the ball object
+		this.getX = function(){
+			this.x = this.element.style.left;
+			return (this.x.substring(0, this.x.length - 2));
+		};
+		// returns top position of the ball object
+		this.getY = function(){
+			this.y = this.element.style.top;
+			return (this.y.substring(0, this.y.length - 2));
+		};
+		// sets left position of the ball object + pos
+		this.setX = function(pos){
+			this.element.style.left = pos + 'px';
+		};
+		// sets top position of the ball object + pos
+		this.setY = function(pos){
+			this.element.style.top = pos + 'px';
+		};
+	};
+	// adds px to the position based on the current position of the ball object
+	// the int values are based on the size of the ball object
+	var playIt = function(obj){
+		var xx = obj.getX();
+	
+		if(obj.right){
+			xx++;
+			if(xx >= 350) obj.right = false;
+		}
+		if(!obj.right){
+			xx--;
+			if(xx <= 0) obj.right = true;
+		}
+		obj.setX(xx);
+		
+		var yy = obj.getY();
+
+		if(obj.down){
+			yy++;
+			if(yy >= 150) obj.down = false;
+		}
+		if(!obj.down){
+			yy--;
+			if(yy <= 0) obj.down = true;
+		}
+		obj.setY(yy);
+	};
+		// adds px to the position based on the current position of the ball object
+		// the int values are based on the size of the ball object
+		var playIt2 = function(obj){
+		var xx = obj.getX();
+		console.log(xx);
+		if(obj.right){
+			xx++;
+			if(xx >= 365) obj.right = false;
+		}
+		if(!obj.right){
+			xx--;
+			if(xx <= 0) obj.right = true;
+		}
+		obj.setX(xx);
+		
+		var yy = obj.getY();
+
+		if(obj.down){
+			yy++;
+			if(yy >= 165) obj.down = false;
+		}
+		if(!obj.down){
+			yy--;
+			if(yy <= 0) obj.down = true;
+		}
+		obj.setY(yy);
+	};
+	// create ball objects and sets intervals
+	ball1 = new Ball('1','yellow','50px','50px');
+	setInterval( 'playIt(ball1)',10);
+	ball2 = new Ball('2','blue','35px','35px');
+	setInterval( 'playIt2(ball2)',8);
+	ball3 = new Ball('3','green','35px','35px');
+	setInterval( 'playIt2(ball3)',3);
+</script>
